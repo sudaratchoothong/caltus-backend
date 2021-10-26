@@ -38,5 +38,10 @@ router.route('/register').post((request,response)=>{
 });
 
 
+router.route('/login').post((request,response)=>{
+    db.login(request,response);
+});
+
+
 
 module.exports = router;
