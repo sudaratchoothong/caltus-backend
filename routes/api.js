@@ -29,6 +29,7 @@ const connection = mysql.createConnection({
 //     });
 //   });
 
+
 router.route('/user').get((request, response)=>{
     db.getuser(request,response);
 });
@@ -42,6 +43,24 @@ router.route('/login').post((request,response)=>{
     db.login(request,response);
 });
 
+router.route('/loginWithGoogle').post((request,response)=>{
+    db.loginWithGoogle(request,response);
+});
 
+router.route('/session').get((request,response)=>{
+    db.session(request,response);
+});
+
+router.route('/logout').get((request,response)=>{
+    db.logout(request,response);
+});
+
+router.route('/me').get((request,response)=>{
+    db.getMe(request,response);
+});
+
+router.route('/me/update').put((request,response)=>{
+    db.updateMe(request,response);
+});
 
 module.exports = router;
