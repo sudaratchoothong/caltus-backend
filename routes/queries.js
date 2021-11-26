@@ -140,7 +140,7 @@ const loginWithGoogle = async(req,res) => {
   }
 }
 
-// เช็ค Session
+// เช็ค Session //สร้างเพื่อเปิดเว็บราวเซอร์ติดต่อเซิร์ฟทางurl ***Session เป็นไฟล์ที่ถูกเก็บไว้ฝั่งเซิร์ฟเวอร์
 const session = async(req,res) => {
   return res.send({error:false, data:req.session, message:"Your session"});
 }
