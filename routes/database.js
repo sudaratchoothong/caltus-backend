@@ -5,7 +5,7 @@ const pool = mysql.createPool({
   host: 'eu-cdbr-west-01.cleardb.com',
   user: 'bcc3dc74734388',
   password: 'd51da328',
-  database: 'caltus'
+  database: 'heroku_dce05c6e513da3b'
 })
 
 pool.getConnection((err, connection) => {
