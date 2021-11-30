@@ -887,6 +887,296 @@ const calculateApy = async(req,res) => {
 
 }
 
+// Get calculate_pnl
+const getCalulatePnl = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results1 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_pnl a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results1 === undefined || results1.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results1.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results1, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_percent
+const getCalculatePercent = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results2 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_percent a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results2 === undefined || results2.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results2.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results2, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_fee
+const getCalculateFee = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results3 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_fee a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results3 === undefined || results3.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results3.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results3, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_average
+const getCalculateAverage = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results4 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_average a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results4 === undefined || results4.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results4.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results4, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_liquidation
+const getCalculateLiquidation = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results5 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_liquidation a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results5 === undefined || results5.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results5.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results5, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_trade
+const getCalculateTrade = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results6 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_trade a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results6 === undefined || results6.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results6.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results6, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_leverge
+const getCalculateLeverge = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results7 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_leverge a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results7 === undefined || results7.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results7.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results7, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_apy
+const getCalculateApy = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results8 = await pool.query("SELECT * FROM history_calculate h INNER JOIN calculate_apy a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results8 === undefined || results8.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results8.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results8, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+   
+
 module.exports = {
   getuser,
   register,
@@ -917,4 +1207,12 @@ module.exports = {
   calculateTrade,
   calculateLeverge,
   calculateApy,
+  getCalulatePnl,
+  getCalculatePercent,
+  getCalculateFee,
+  getCalculateAverage,
+  getCalculateLiquidation,
+  getCalculateTrade,
+  getCalculateLeverge,
+  getCalculateApy,
 };

@@ -147,4 +147,36 @@ router.route('/calculateApy').post((request,response)=>{
     db.calculateApy(request,response);
 });
 
+router.route('/calculatePnl').get((request,response)=>{
+    db.getCalulatePnl(request,response);
+});
+
+router.route('/calculatePercent').get((request,response)=>{
+    db.getCalculatePercent(request,response);
+});
+
+router.route('/calculateFee').get((request,response)=>{
+    db.getCalculateFee(request,response);
+});
+
+router.route('/calculateAverage').get((request,response)=>{
+    db.getCalculateAverage(request,response);
+});
+
+router.route('/calculateLiquidation').get((request,response)=>{
+    db.getCalculateLiquidation(request,response);
+});
+
+router.route('/calculateTrade').get((request,response)=>{
+    db.getCalculateTrade(request,response);
+});
+
+router.route('/calculateLeverage').get((request,response)=>{
+    db.getCalculateLeverge(request,response);
+});
+
+router.route('/calculateApy').get((request,response)=>{
+    db.getCalculateApy(request,response);
+});
+
 module.exports = router;
