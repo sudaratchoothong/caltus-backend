@@ -15,21 +15,6 @@ const connection = mysql.createConnection({
    database: 'caltus'
 });
 
-// router.route('/user').get((request, response) => {
-//     // db.getuser().then((data) => {
-//     //   response.json(data[0]);
-//     // })
-//     connection.query('SELECT * FROM user', function(err, results) {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             response.send(results);
-//         }
-
-//     });
-//   });
-
-
 router.route('/user').get((request, response)=>{
     db.getuser(request,response);
 });

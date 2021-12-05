@@ -6,14 +6,6 @@ const pool = require('./database');
 //init
 const sqltRounds = 10;
 
-// เชื่อมดาต้า
-// const connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "caltus",
-// });
-
 /* GET users listing. */
 const getuser = async(req,res) => {
   let message = "";
@@ -85,20 +77,22 @@ const login = async(req,res) => {
   try {
     const results = await pool.query("SELECT * FROM user WHERE username = ?",[user.username])
       if (results === undefined ||  results.length == 0) {
-        message = "not math username";
+        message = "Not math username";
         error = true;
     } else {
       if (bcrypt.compareSync(user.password,results[0].password)) {
         message = "Login Successfully";
         error = false;
-        delete results[0].password;
         req.session.id_user = results[0].id_user;
+        // res.cookie('id_user',results[0].id_user)
+        console.log("After set session ",req.session.id_user);
       } else {
         message = "Not math password";
         error = true;
       }
+      delete results[0].password;
     }
-    return res.send({error:error, data:results, message:message});
+    return res.send({error:error, data:results[0], message:message});
   }
   catch (err) {
     console.log(err);
@@ -142,12 +136,18 @@ const loginWithGoogle = async(req,res) => {
 
 // เช็ค Session //สร้างเพื่อเปิดเว็บราวเซอร์ติดต่อเซิร์ฟทางurl ***Session เป็นไฟล์ที่ถูกเก็บไว้ฝั่งเซิร์ฟเวอร์
 const session = async(req,res) => {
-  return res.send({error:false, data:req.session, message:"Your session"});
+  let sess = await req.session;
+  console.log("session req.session.id_user ",sess.id_user);
+  if (sess) {
+    return res.send({error:false, data:sess, message:"Your session"});
+  } else {
+    return res.send({error:true, data:sess, message:"Session not found"});
+  }
 }
 
 // Logout
 const logout = async(req,res) => {
-  req.session.destroy();
+  req.session = null;
   return res.send({error:false, message:"Your logout successfully"})
 }
 
