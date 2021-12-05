@@ -55,6 +55,10 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  // Set a same-site cookie for first-party contexts
+res.cookie('cookie1', 'value1', { sameSite: 'lax' });
+// Set a cross-site cookie for third-party contexts
+res.cookie('cookie2', 'value2', { sameSite: 'none', secure: true });
   res.setHeader('set-cookie', [
     'cookie1=value1; SameSite=Lax',
     'cookie2=value2; SameSite=None; Secure',
