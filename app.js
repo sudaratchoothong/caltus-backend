@@ -16,7 +16,11 @@ var app = express();
 var cookieSession = require('cookie-session')
 app.use(cookieSession({
   name: 'session',
-  keys: ['key1', 'key2']
+  keys: ['key1', 'key2'],
+  maxAge: 24 * 60 * 60 * 100,
+  secure: true,
+  httpOnly: true,
+  sameSite: 'none'
 }))
 
 const corsConfig = {
