@@ -337,10 +337,13 @@ const createMyTracker = async(req,res) => {
     stock_name: req.body.stock_name,
     amount_stock: req.body.amount_stock,
     buy_pricel: req.body.buy_pricel,
+    api: req.body.api,
+    symbol: req.body.symbol,
+    img: req.body.img,
   }
 
   try {
-    const results = await pool.query("INSERT INTO tracker (stock_name,amount_stock,buy_pricel,id_user) VALUES (?,?,?,?)",[tracker.stock_name,tracker.amount_stock,tracker.buy_pricel,id_user]);
+    const results = await pool.query("INSERT INTO tracker (stock_name,amount_stock,buy_pricel,api,symbol,img,id_user) VALUES (?,?,?,?,?,?,?)",[tracker.stock_name,tracker.amount_stock,tracker.buy_pricel,tracker.api,tracker.symbol,tracker.img,id_user]);
     message = "Tracker coin successfully added";
     error = false
     return res.send({error:error, data:{id_tracker:results.insertId}, message:message});
@@ -1427,6 +1430,7 @@ const getCalculatePercentThree = async(req,res) => {
     console.log(err);
   }
 }
+
 
    
 
