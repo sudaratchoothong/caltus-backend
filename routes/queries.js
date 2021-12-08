@@ -1312,6 +1312,7 @@ const calculatePercentThree = async(req,res) => {
 const getCalculatePercentOne = async(req,res) => {
   let message = "";
   let error;
+  let results;
   if (isLogin(req) == false) {
     message = "Login again";
     error = true;
@@ -1325,7 +1326,7 @@ const getCalculatePercentOne = async(req,res) => {
       message = "History not found.";
       error = true;
     } else {
-      const results = results2.filter((result) => {
+        results = results2.filter((result) => {
         return result.result1 != null;
       });
       message = "Successfully retrieved history.";
@@ -1351,6 +1352,7 @@ const getCalculatePercentOne = async(req,res) => {
 const getCalculatePercentTwo = async(req,res) => {
   let message = "";
   let error;
+  let results;
   if (isLogin(req) == false) {
     message = "Login again";
     error = true;
@@ -1364,9 +1366,12 @@ const getCalculatePercentTwo = async(req,res) => {
       message = "History not found.";
       error = true;
     } else {
+      results = results2.filter((result) => {
+        return result.result1 != null;
+      });
       message = "Successfully retrieved history.";
       error = false;
-      results2.sort((left,right) => {
+      results.sort((left,right) => {
         if (left.id_history_calculate < right.id_history_calculate) {
           return -1;
         } else if (left.id_history_calculate > right.id_history_calculate) {
@@ -1376,7 +1381,7 @@ const getCalculatePercentTwo = async(req,res) => {
         }
       });
     }
-    return res.send({error:error, data:results2, message:message});
+    return res.send({error:error, data:results, message:message});
   }
   catch (err) {
     console.log(err);
@@ -1387,6 +1392,7 @@ const getCalculatePercentTwo = async(req,res) => {
 const getCalculatePercentThree = async(req,res) => {
   let message = "";
   let error;
+  let results;
   if (isLogin(req) == false) {
     message = "Login again";
     error = true;
@@ -1400,9 +1406,12 @@ const getCalculatePercentThree = async(req,res) => {
       message = "History not found.";
       error = true;
     } else {
+      results = results2.filter((result) => {
+        return result.result1 != null;
+      });
       message = "Successfully retrieved history.";
       error = false;
-      results2.sort((left,right) => {
+      results.sort((left,right) => {
         if (left.id_history_calculate < right.id_history_calculate) {
           return -1;
         } else if (left.id_history_calculate > right.id_history_calculate) {
@@ -1412,7 +1421,7 @@ const getCalculatePercentThree = async(req,res) => {
         }
       });
     }
-    return res.send({error:error, data:results2, message:message});
+    return res.send({error:error, data:results, message:message});
   }
   catch (err) {
     console.log(err);
