@@ -164,4 +164,31 @@ router.route('/calculateApy').get((request,response)=>{
     db.getCalculateApy(request,response);
 });
 
+
+// Api ใหม่ของเครื่องคิดเปอเซน
+router.route('/calculatePercentOne').post((request,response)=>{
+    db.calculatePercentOne(request,response);
+});
+
+router.route('/calculatePercentTwo').post((request,response)=>{
+    db.calculatePercentTwo(request,response);
+});
+
+router.route('/calculatePercentThree').post((request,response)=>{
+    db.calculatePercentThree(request,response);
+});
+
+router.route('/CalculatePercentOne').get((request,response)=>{
+    db.getCalculatePercentOne(request,response);
+});
+
+router.route('/CalculatePercentTwo').get((request,response)=>{
+    db.getCalculatePercentTwo(request,response);
+});
+
+router.route('/CalculatePercentThree').get((request,response)=>{
+    db.getCalculatePercentThree(request,response);
+});
+
+
 module.exports = router;

@@ -654,40 +654,40 @@ const calculatePnl = async(req,res) => {
 
 }
 
-// calculate_percent
-const calculatePercent = async(req,res) => {
-  let message = "";
-  let error;
-  if (isLogin(req) == false) {
-    message = "Login again";
-    error = true;
-    return res.send({error:error, message:message})
-  }
-  const id_user = req.session.id_user;
-  const percent = {
-    id_cal: req.body.id_cal,
-    amount1_1: req.body.amount1_1,
-    percent1_2: req.body.percent1_2,
-    input2_1: req.body.input2_1,
-    input2_2: req.body.input2_2,
-    price3_1: req.body.price3_1,
-    price3_2: req.body.price3_2,
-    result: req.body.result,
-  }
+// calculate_percent(สร้างประวัติเครื่องเปอเซนเก่า)
+// const calculatePercent = async(req,res) => {
+//   let message = "";
+//   let error;
+//   if (isLogin(req) == false) {
+//     message = "Login again";
+//     error = true;
+//     return res.send({error:error, message:message})
+//   }
+//   const id_user = req.session.id_user;
+//   const percent = {
+//     id_cal: req.body.id_cal,
+//     amount1_1: req.body.amount1_1,
+//     percent1_2: req.body.percent1_2,
+//     input2_1: req.body.input2_1,
+//     input2_2: req.body.input2_2,
+//     price3_1: req.body.price3_1,
+//     price3_2: req.body.price3_2,
+//     result: req.body.result,
+//   }
 
-  try {
-    const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
-    const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,amount1_1,percent1_2,input2_1,input2_2,price3_1,price3_2,result) VALUES (?,?,?,?,?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.amount1_1,percent.percent1_2,percent.input2_1,percent.input2_2,percent.price3_1,percent.price3_2,percent.result]);
-    message = "History successfully added";
-    error = false;
+//   try {
+//     const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
+//     const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,amount1_1,percent1_2,input2_1,input2_2,price3_1,price3_2,result) VALUES (?,?,?,?,?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.amount1_1,percent.percent1_2,percent.input2_1,percent.input2_2,percent.price3_1,percent.price3_2,percent.result]);
+//     message = "History successfully added";
+//     error = false;
 
-    return res.send({error:error, data:resultsPercent, message:message});
-  }
-  catch (err) {
-    console.log(err);
-  }
+//     return res.send({error:error, data:resultsPercent, message:message});
+//   }
+//   catch (err) {
+//     console.log(err);
+//   }
 
-}
+// }
 
 // calculate_fee
 const calculateFee = async(req,res) => {
@@ -1175,6 +1175,247 @@ const getCalculateApy = async(req,res) => {
   }
 }
 
+
+
+
+// calculate_percent(สร้างประวัติเครื่องเปอเซนทั้งหมดใหม่)
+const calculatePercent = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+  const percent = {
+    id_cal: req.body.id_cal,
+    amount1_1: req.body.amount1_1,
+    percent1_2: req.body.percent1_2,
+    input2_1: req.body.input2_1,
+    input2_2: req.body.input2_2,
+    price3_1: req.body.price3_1,
+    price3_2: req.body.price3_2,
+    result1: req.body.result1,
+    result2: req.body.result2,
+    result3: req.body.result3,
+  }
+
+  try {
+    const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
+    const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,amount1_1,percent1_2,input2_1,input2_2,price3_1,price3_2,result1,result2,result3) VALUES (?,?,?,?,?,?,?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.amount1_1,percent.percent1_2,percent.input2_1,percent.input2_2,percent.price3_1,percent.price3_2,percent.result1,percent.result2,percent.result3]);
+    message = "History successfully added";
+    error = false;
+
+    return res.send({error:error, data:resultsPercent, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
+
+// calculate_percent(สร้างประวัติเครื่องเปอเซนย่อยหนึ่งใหม่)
+const calculatePercentOne = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+  const percent = {
+    id_cal: req.body.id_cal,
+    amount1_1: req.body.amount1_1,
+    percent1_2: req.body.percent1_2,
+    result: req.body.result1,
+  }
+
+  try {
+    const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
+    const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,amount1_1,percent1_2,result1) VALUES (?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.amount1_1,percent.percent1_2,percent.result1]);
+    message = "History successfully added";
+    error = false;
+
+    return res.send({error:error, data:resultsPercent, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
+
+// calculate_percent(สร้างประวัติเครื่องเปอเซนย่อยสองใหม่)
+const calculatePercentTwo = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+  const percent = {
+    id_cal: req.body.id_cal,
+    input2_1: req.body.input2_1,
+    input2_2: req.body.input2_2,
+    result2: req.body.result2,
+  }
+
+  try {
+    const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
+    const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,input2_1,input2_2,result2) VALUES (?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.input2_1,percent.input2_2,percent.result2]);
+    message = "History successfully added";
+    error = false;
+
+    return res.send({error:error, data:resultsPercent, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
+
+// calculate_percent(สร้างประวัติเครื่องเปอเซนย่อยสามใหม่)
+const calculatePercentThree = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+  const percent = {
+    id_cal: req.body.id_cal,
+    price3_1: req.body.price3_1,
+    price3_2: req.body.price3_2,
+    result3: req.body.result3,
+  }
+
+  try {
+    const resultsHistory = await pool.query("INSERT INTO history_calculate (id_cal,id_user) VALUES (?,?)",[percent.id_cal,id_user]);
+    const resultsPercent = await pool.query("INSERT INTO calculate_percent (id_history_calculate,id_cal,price3_1,price3_2,result3) VALUES (?,?,?,?,?)",[resultsHistory.insertId,percent.id_cal,percent.price3_1,percent.price3_2,percent.result3]);
+    message = "History successfully added";
+    error = false;
+
+    return res.send({error:error, data:resultsPercent, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+
+}
+
+// Get calculate_percent (ดึงประวัติเครื่องเปอเซนย่อยหนึ่งใหม่)
+const getCalculatePercentOne = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results2 = await pool.query("SELECT h.id_history_calculate,h.id_cal,h.created_at,h.id_user,a.amount1_1,a.percent1_2,a.result1 FROM history_calculate h INNER JOIN calculate_percent a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results2 === undefined || results2.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results2.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results2, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_percent (ดึงประวัติเครื่องเปอเซนย่อยสองใหม่)
+const getCalculatePercentTwo = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results2 = await pool.query("SELECT h.id_history_calculate,h.id_cal,h.created_at,h.id_user,a.input2_1,a.input2_2,a.result2 FROM history_calculate h INNER JOIN calculate_percent a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results2 === undefined || results2.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results2.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results2, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+// Get calculate_percent (ดึงประวัติเครื่องเปอเซนย่อยสามใหม่)
+const getCalculatePercentThree = async(req,res) => {
+  let message = "";
+  let error;
+  if (isLogin(req) == false) {
+    message = "Login again";
+    error = true;
+    return res.send({error:error, message:message})
+  }
+  const id_user = req.session.id_user;
+
+  try {
+    const results2 = await pool.query("SELECT h.id_history_calculate,h.id_cal,h.created_at,h.id_user,a.price3_1,a.price3_2,a.result3 FROM history_calculate h INNER JOIN calculate_percent a ON h.id_history_calculate = a.id_history_calculate AND h.id_cal = a.id_cal WHERE h.id_user = ?",[id_user]);
+    if (results2 === undefined || results2.length == 0) {
+      message = "History not found.";
+      error = true;
+    } else {
+      message = "Successfully retrieved history.";
+      error = false;
+      results2.sort((left,right) => {
+        if (left.id_history_calculate < right.id_history_calculate) {
+          return -1;
+        } else if (left.id_history_calculate > right.id_history_calculate) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    }
+    return res.send({error:error, data:results2, message:message});
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
    
 
 module.exports = {
@@ -1215,4 +1456,11 @@ module.exports = {
   getCalculateTrade,
   getCalculateLeverge,
   getCalculateApy,
+
+  calculatePercentOne,
+  calculatePercentTwo,
+  calculatePercentThree,
+  getCalculatePercentOne,
+  getCalculatePercentTwo,
+  getCalculatePercentThree,
 };
