@@ -178,15 +178,15 @@ router.route('/calculatePercentThree').post((request,response)=>{
     db.calculatePercentThree(request,response);
 });
 
-router.route('/CalculatePercentOne').get((request,response)=>{
+router.route('/calculatePercentOne').get((request,response)=>{
     db.getCalculatePercentOne(request,response);
 });
 
-router.route('/CalculatePercentTwo').get((request,response)=>{
+router.route('/calculatePercentTwo').get((request,response)=>{
     db.getCalculatePercentTwo(request,response);
 });
 
-router.route('/CalculatePercentThree').get((request,response)=>{
+router.route('/calculatePercentThree').get((request,response)=>{
     db.getCalculatePercentThree(request,response);
 });
 
