@@ -1325,9 +1325,12 @@ const getCalculatePercentOne = async(req,res) => {
       message = "History not found.";
       error = true;
     } else {
+      const results = results2.filter((result) => {
+        return result.result1 != null;
+      });
       message = "Successfully retrieved history.";
       error = false;
-      results2.sort((left,right) => {
+      results.sort((left,right) => {
         if (left.id_history_calculate < right.id_history_calculate) {
           return -1;
         } else if (left.id_history_calculate > right.id_history_calculate) {
@@ -1337,7 +1340,7 @@ const getCalculatePercentOne = async(req,res) => {
         }
       });
     }
-    return res.send({error:error, data:results2, message:message});
+    return res.send({error:error, data:results, message:message});
   }
   catch (err) {
     console.log(err);
